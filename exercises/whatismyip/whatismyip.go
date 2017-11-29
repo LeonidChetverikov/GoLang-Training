@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 )
-type myip struct{
-	ipshow string
+var Myip struct{
+	Ipshow string `json:"origin"`
 }
 
 func main() {
@@ -17,18 +17,21 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 	defer resp.Body.Close()
-	myip2:=new(myip)
+
 	response,err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		panic(err)
 	}
-	err = json.Unmarshal([]byte(response), &myip2)
+
+
+	err = json.Unmarshal(response, &Myip)
 	if err !=nil {
 		panic(err)
 					}
 
-	fmt.Println(myip2)
+	fmt.Println(Myip.Ipshow)
 
 
 
